@@ -1,0 +1,29 @@
+<h1 class="tisch-title">Würfel Signals</h1>
+<div class="wuerfel-container">
+  <app-wuerfel
+    [nummer]="1"
+    [augen]="wuerfel1()"
+    (wuerfelChange)="onWuerfelChange($event)"
+  ></app-wuerfel>
+  <app-wuerfel
+    [nummer]="2"
+    [augen]="wuerfel2()"
+    (wuerfelChange)="onWuerfelChange($event)"
+  ></app-wuerfel>
+  <app-wuerfel
+    [nummer]="3"
+    [augen]="wuerfel3()"
+    (wuerfelChange)="onWuerfelChange($event)"
+  ></app-wuerfel>
+  <app-wuerfel
+    [nummer]="4"
+    [augen]="wuerfel4()"
+    (wuerfelChange)="onWuerfelChange($event)"
+  ></app-wuerfel>
+  <app-wuerfel
+    [nummer]="5"
+    [augen]="wuerfel5()"
+    (wuerfelChange)="onWuerfelChange($event)"
+  ></app-wuerfel>
+</div>
+<button (click)="onRandomize()">Randomize</button>
