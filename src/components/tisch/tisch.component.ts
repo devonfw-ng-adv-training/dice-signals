@@ -28,23 +28,23 @@ export class TischComponent {
       (this.wuerfel5() === 1 ? 1 : 0),
   );
 
-  onWuerfelChange($event: WuerfelErgebnis | null) {
-    if ($event?.augenzahl) {
-      switch ($event.wuerfelNummer) {
+  onWuerfelChange(ergebnis: WuerfelErgebnis | null) {
+    if (ergebnis?.augenzahl) {
+      switch (ergebnis.wuerfelNummer) {
         case 1:
-          this.wuerfel1.set($event?.augenzahl);
+          this.wuerfel1.set(ergebnis?.augenzahl);
           break;
         case 2:
-          this.wuerfel2.set($event?.augenzahl);
+          this.wuerfel2.set(ergebnis?.augenzahl);
           break;
         case 3:
-          this.wuerfel3.set($event?.augenzahl);
+          this.wuerfel3.set(ergebnis?.augenzahl);
           break;
         case 4:
-          this.wuerfel4.set($event?.augenzahl);
+          this.wuerfel4.set(ergebnis?.augenzahl);
           break;
         case 5:
-          this.wuerfel5.set($event?.augenzahl);
+          this.wuerfel5.set(ergebnis?.augenzahl);
           break;
       }
     }
