@@ -1,9 +1,9 @@
 import {
+  AfterViewInit,
   Component,
   effect,
-  EventEmitter,
   input,
-  Output,
+  output,
   signal,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -15,16 +15,17 @@ import { WuerfelErgebnis } from '../tisch/tisch.component';
   templateUrl: './wuerfel.component.html',
   styleUrl: './wuerfel.component.scss',
 })
-export class WuerfelComponent {
+export class WuerfelComponent implements AfterViewInit {
   nummer = input<number>();
-  augen = input<number>();
+  augen = input<number | null>(null);
 
+  aktuelleAugen = signal<number | null>(null);
   iconUrl = signal<string>('assets/icons/6.svg');
 
-  @Output() wuerfelChange = new EventEmitter<WuerfelErgebnis | null>();
+  wuerfelChangeOutput = output<WuerfelErgebnis | null>();
 
-  select = new FormControl<number>(1, Validators.required);
-
+  // Form mit Select-Box
+  select = new FormControl<number>(6, Validators.required);
   options = [
     { augenzahl: 1, label: 'Eins' },
     { augenzahl: 2, label: 'Zwei' },
@@ -37,16 +38,22 @@ export class WuerfelComponent {
   constructor() {
     effect(() => {
       const augenzahl = this.augen();
-      this.select.setValue(augenzahl ? augenzahl : null);
+      this.select.setValue(augenzahl);
 
       this.iconUrl.set(`assets/icons/${augenzahl}.svg`);
     });
   }
 
+  ngAfterViewInit() {
+    this.aktuelleAugen.set(this.augen());
+  }
+
   onSelectionChange() {
-    this.wuerfelChange.emit({
+    this.aktuelleAugen.set(this.select.value);
+
+    this.wuerfelChangeOutput.emit({
       wuerfelNummer: this.nummer(),
-      augenzahl: this.select.value,
+      augenzahl: Number(this.aktuelleAugen()),
     });
   }
 }

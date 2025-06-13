@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { WuerfelComponent } from '../wuerfel/wuerfel.component';
 
 export type WuerfelErgebnis = {
@@ -18,6 +18,15 @@ export class TischComponent {
   wuerfel3 = signal<number>(6);
   wuerfel4 = signal<number>(6);
   wuerfel5 = signal<number>(6);
+
+  einser = computed(
+    () =>
+      (this.wuerfel1() === 1 ? 1 : 0) +
+      (this.wuerfel2() === 1 ? 1 : 0) +
+      (this.wuerfel3() === 1 ? 1 : 0) +
+      (this.wuerfel4() === 1 ? 1 : 0) +
+      (this.wuerfel5() === 1 ? 1 : 0),
+  );
 
   onWuerfelChange($event: WuerfelErgebnis | null) {
     if ($event?.augenzahl) {
