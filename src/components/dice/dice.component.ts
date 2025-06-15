@@ -1,4 +1,12 @@
-import { Component, effect, input, OnInit, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DiceResult } from '../casino/casino.component';
 
@@ -7,15 +15,16 @@ import { DiceResult } from '../casino/casino.component';
   imports: [ReactiveFormsModule],
   templateUrl: './dice.component.html',
   styleUrl: './dice.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiceComponent implements OnInit {
-  diceNumber = input<number>();
-  points = input<number | null>(null);
+  @Input() diceNumber: number | undefined;
+  @Input() points: number | null | undefined;
+
+  @Output() diceChangeOutput = new EventEmitter<DiceResult | null>();
 
   currentPoints: number | null = 0;
   iconUrl: string = 'assets/icons/6.svg';
-
-  diceChangeOutput = output<DiceResult | null>();
 
   // Form with select-box
   select = new FormControl<number>(6, Validators.required);
@@ -30,23 +39,22 @@ export class DiceComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      const points = this.points();
-      this.select.setValue(points);
+      if (this.points) {
+        this.select.setValue(this.points);
 
-      this.iconUrl = `assets/icons/${points}.svg`;
+        this.iconUrl = `assets/icons/${this.points}.svg`;
+      }
     });
   }
 
-  ngOnInit() {
-    this.currentPoints = this.points();
-  }
+  ngOnInit() {}
 
   onSelectionChange() {
     this.currentPoints = this.select.value;
 
     this.diceChangeOutput.emit({
-      diceNumber: this.diceNumber(),
-      points: Number(this.currentPoints),
+      diceNumber: this.diceNumber,
+      points: Number(this.points),
     });
   }
 }

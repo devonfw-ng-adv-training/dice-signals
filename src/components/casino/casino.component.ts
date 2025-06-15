@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -14,6 +14,7 @@ export type DiceResult = {
   imports: [DiceComponent, AsyncPipe],
   templateUrl: './casino.component.html',
   styleUrl: './casino.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CasinoComponent implements OnInit {
   dice1$ = new BehaviorSubject<number>(6);

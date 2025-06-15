@@ -1,5 +1,5 @@
 <div class="dice-box">
-  <div>Dice {{ diceNumber() }}</div>
+  <div>Dice {{ diceNumber }}</div>
   <select id="select" [formControl]="select" (change)="onSelectionChange()">
     @for (option of options; track option.points) {
       <option [value]="option.points">
