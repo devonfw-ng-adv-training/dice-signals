@@ -3,9 +3,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CubeResult } from '../casino/casino.component';
@@ -17,9 +15,14 @@ import { CubeResult } from '../casino/casino.component';
   styleUrl: './cube.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CubeComponent implements OnChanges {
+export class CubeComponent {
   @Input() cubeNumber: number | undefined;
-  @Input() points: number | null | undefined;
+  @Input() set points(n: number | undefined | null) {
+    this.currentPoints = n ? n : undefined;
+
+    this.select.setValue(this.currentPoints ? this.currentPoints : null);
+    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
+  }
 
   @Output() cubeChangeOutput = new EventEmitter<CubeResult | null>();
 
@@ -36,13 +39,6 @@ export class CubeComponent implements OnChanges {
     { points: 5, label: 'Five' },
     { points: 6, label: 'Six' },
   ];
-
-  ngOnChanges(changes: SimpleChanges) {
-    this.currentPoints = this.points ? this.points : undefined;
-
-    this.select.setValue(this.currentPoints ? this.currentPoints : null);
-    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
-  }
 
   onSelectionChange() {
     this.currentPoints = this.select.value ? this.select.value : undefined;
