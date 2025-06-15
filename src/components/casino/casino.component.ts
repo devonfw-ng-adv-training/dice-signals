@@ -170,19 +170,19 @@ export class CasinoComponent implements OnInit {
     if (result?.points) {
       switch (result.cubeNumber) {
         case 1:
-          this.dice1$.next(result?.points);
+          this.dice1$.next(result.points);
           break;
         case 2:
-          this.dice2$.next(result?.points);
+          this.dice2$.next(result.points);
           break;
         case 3:
-          this.dice3$.next(result?.points);
+          this.dice3$.next(result.points);
           break;
         case 4:
-          this.dice4$.next(result?.points);
+          this.dice4$.next(result.points);
           break;
         case 5:
-          this.dice5$.next(result?.points);
+          this.dice5$.next(result.points);
           break;
       }
     }
