@@ -126,19 +126,19 @@ export class CasinoComponent {
     if (result?.points) {
       switch (result.diceNumber) {
         case 1:
-          this.cube1.set(result?.points);
+          this.cube1.set(result.points);
           break;
         case 2:
-          this.cube2.set(result?.points);
+          this.cube2.set(result.points);
           break;
         case 3:
-          this.cube3.set(result?.points);
+          this.cube3.set(result.points);
           break;
         case 4:
-          this.cube4.set(result?.points);
+          this.cube4.set(result.points);
           break;
         case 5:
-          this.cube5.set(result?.points);
+          this.cube5.set(result.points);
           break;
       }
     }
