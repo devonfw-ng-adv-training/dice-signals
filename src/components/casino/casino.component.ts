@@ -189,15 +189,15 @@ export class CasinoComponent implements OnInit {
   }
 
   onRandomize() {
-    this.dice1$.next(getRandomAugen());
-    this.dice2$.next(getRandomAugen());
-    this.dice3$.next(getRandomAugen());
-    this.dice4$.next(getRandomAugen());
-    this.dice5$.next(getRandomAugen());
+    this.dice1$.next(getRandomPoints());
+    this.dice2$.next(getRandomPoints());
+    this.dice3$.next(getRandomPoints());
+    this.dice4$.next(getRandomPoints());
+    this.dice5$.next(getRandomPoints());
   }
 }
 
-function getRandomAugen() {
+function getRandomPoints() {
   return Math.floor(Math.random() * 6) + 1;
 }
 
