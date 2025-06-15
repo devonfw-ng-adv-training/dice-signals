@@ -166,7 +166,7 @@ export class CasinoComponent implements OnInit {
     );
   }
 
-  onDiceChange(result: CubeResult | null) {
+  onCubeChange(result: CubeResult | null) {
     if (result?.points) {
       switch (result.cubeNumber) {
         case 1:
