@@ -64,8 +64,6 @@ export class CasinoComponent {
     }, 0),
   );
 
-  // Todo hier noch die anderen
-
   threeOfAKind = computed(() =>
     getPointsCount(this.allDice()).findIndex((p) => p >= 3) === -1
       ? 0
@@ -118,7 +116,7 @@ export class CasinoComponent {
 
   chance = computed(() => this.allDice().reduce((acc, curr) => acc + curr));
 
-  onDiceChange(result: DiceResult | null) {
+  onCubeChange(result: DiceResult | null) {
     if (result?.points) {
       switch (result.diceNumber) {
         case 1:
