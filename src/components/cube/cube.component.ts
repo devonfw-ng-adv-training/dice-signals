@@ -23,6 +23,7 @@ export class CubeComponent implements OnChanges {
 
   @Output() cubeChangeOutput = new EventEmitter<CubeResult | null>();
 
+  currentPoints: number | undefined = 6;
   iconUrl: string = 'assets/icons/6.svg';
 
   // Form with select-box
@@ -37,18 +38,19 @@ export class CubeComponent implements OnChanges {
   ];
 
   ngOnChanges(changes: SimpleChanges) {
-    const points = this.points;
+    this.currentPoints = this.points ? this.points : undefined;
 
-    this.select.setValue(points ? points : null);
-    this.iconUrl = `assets/icons/${points}.svg`;
+    this.select.setValue(this.currentPoints ? this.currentPoints : null);
+    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
   }
 
   onSelectionChange() {
-    this.iconUrl = `assets/icons/${this.select.value}.svg`;
+    this.currentPoints = this.select.value ? this.select.value : undefined;
+    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
 
     this.cubeChangeOutput.emit({
       cubeNumber: this.cubeNumber,
-      points: Number(this.cubeNumber),
+      points: Number(this.currentPoints),
     });
   }
 }
