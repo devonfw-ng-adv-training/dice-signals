@@ -38,7 +38,7 @@ export class CasinoComponent implements OnInit {
   chance$: Observable<number> | undefined;
 
   ngOnInit() {
-    const alldDices$ = combineLatest([
+    const alldDice$ = combineLatest([
       this.dice1$,
       this.dice2$,
       this.dice3$,
@@ -46,7 +46,7 @@ export class CasinoComponent implements OnInit {
       this.dice5$,
     ]);
 
-    this.ones$ = alldDices$.pipe(
+    this.ones$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 1 ? 1 : 0);
@@ -54,7 +54,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.twos$ = alldDices$.pipe(
+    this.twos$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 2 ? 2 : 0);
@@ -62,7 +62,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.threes$ = alldDices$.pipe(
+    this.threes$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 3 ? 3 : 0);
@@ -70,7 +70,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.fours$ = alldDices$.pipe(
+    this.fours$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 4 ? 4 : 0);
@@ -78,7 +78,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.fives$ = alldDices$.pipe(
+    this.fives$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 5 ? 5 : 0);
@@ -86,7 +86,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.sixes$ = alldDices$.pipe(
+    this.sixes$ = alldDice$.pipe(
       map((points) =>
         points.reduce((acc, curr) => {
           return acc + (curr === 6 ? 6 : 0);
@@ -94,7 +94,7 @@ export class CasinoComponent implements OnInit {
       ),
     );
 
-    this.threeOfAKind$ = alldDices$.pipe(
+    this.threeOfAKind$ = alldDice$.pipe(
       map((points) => {
         return getPointsCount(points).findIndex((p) => p >= 3) === -1
           ? 0
@@ -102,7 +102,7 @@ export class CasinoComponent implements OnInit {
       }),
     );
 
-    this.fourOfAKind$ = alldDices$.pipe(
+    this.fourOfAKind$ = alldDice$.pipe(
       map((points) => {
         return getPointsCount(points).findIndex((p) => p >= 4) === -1
           ? 0
@@ -110,7 +110,7 @@ export class CasinoComponent implements OnInit {
       }),
     );
 
-    this.fullHouse$ = alldDices$.pipe(
+    this.fullHouse$ = alldDice$.pipe(
       map((points) => {
         return getPointsCount(points).some((p) => p === 3) &&
           getPointsCount(points).some((p) => p === 2)
@@ -119,7 +119,7 @@ export class CasinoComponent implements OnInit {
       }),
     );
 
-    this.smallStraight$ = alldDices$.pipe(
+    this.smallStraight$ = alldDice$.pipe(
       map((points) => {
         const count = getPointsCount(points);
 
@@ -134,7 +134,7 @@ export class CasinoComponent implements OnInit {
       }),
     );
 
-    this.largeStraight$ = alldDices$.pipe(
+    this.largeStraight$ = alldDice$.pipe(
       map((points) => {
         const count = getPointsCount(points);
 
@@ -153,13 +153,13 @@ export class CasinoComponent implements OnInit {
       }),
     );
 
-    this.jackpot$ = alldDices$.pipe(
+    this.jackpot$ = alldDice$.pipe(
       map((points) => {
         return getPointsCount(points).some((p) => p === 5) ? 50 : 0;
       }),
     );
 
-    this.chance$ = alldDices$.pipe(
+    this.chance$ = alldDice$.pipe(
       map((points) => {
         return points.reduce((acc, curr) => acc + curr);
       }),
