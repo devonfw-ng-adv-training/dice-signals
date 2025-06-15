@@ -1,4 +1,4 @@
 import { Routes } from '@angular/router';
-import { TischComponent } from '../components/tisch/tisch.component';
+import { CasinoComponent } from '../components/casino/casino.component';
 
-export const routes: Routes = [{ path: '', component: TischComponent }];
+export const routes: Routes = [{ path: '', component: CasinoComponent }];

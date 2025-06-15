@@ -1,0 +1,34 @@
+.tisch-title {
+  color: white;
+}
+
+.dice-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+  border-color: white;
+  border-radius: 0.5rem;
+  width: 30rem;
+}
+
+table,
+th,
+td {
+  background-color: lightgreen;
+  border-collapse: collapse;
+  border: 0.125rem solid black;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+td {
+  padding: .5em;
+}
