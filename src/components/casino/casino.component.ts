@@ -1,4 +1,9 @@
-import { Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  signal,
+} from '@angular/core';
 import { CubeComponent } from '../cube/cube.component';
 
 export type DiceResult = {
@@ -11,6 +16,7 @@ export type DiceResult = {
   imports: [CubeComponent],
   templateUrl: './casino.component.html',
   styleUrl: './casino.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CasinoComponent {
   cube1 = signal<number>(6);
