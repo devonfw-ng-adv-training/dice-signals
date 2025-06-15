@@ -3,19 +3,19 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DiceResult } from '../casino/casino.component';
 
 @Component({
-  selector: 'app-dice',
+  selector: 'app-cube',
   imports: [ReactiveFormsModule],
-  templateUrl: './dice.component.html',
-  styleUrl: './dice.component.scss',
+  templateUrl: './cube.component.html',
+  styleUrl: './cube.component.scss',
 })
-export class DiceComponent implements OnInit {
-  diceNumber = input<number>();
+export class CubeComponent implements OnInit {
+  cubeNumber = input<number>();
   points = input<number | null>(null);
 
   currentPoints: number | null = 0;
   iconUrl: string = 'assets/icons/6.svg';
 
-  diceChangeOutput = output<DiceResult | null>();
+  cubeChangeOutput = output<DiceResult | null>();
 
   // Form with select-box
   select = new FormControl<number>(6, Validators.required);
@@ -44,8 +44,8 @@ export class DiceComponent implements OnInit {
   onSelectionChange() {
     this.currentPoints = this.select.value;
 
-    this.diceChangeOutput.emit({
-      diceNumber: this.diceNumber(),
+    this.cubeChangeOutput.emit({
+      diceNumber: this.cubeNumber(),
       points: Number(this.currentPoints),
     });
   }

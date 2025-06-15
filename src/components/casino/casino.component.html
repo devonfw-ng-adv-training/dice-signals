@@ -1,30 +1,30 @@
 <h1 class="tisch-title">Dice Signals</h1>
 <div class="dice-container">
-  <app-dice
-    [diceNumber]="1"
-    [points]="dice1$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="2"
-    [points]="dice2$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="3"
-    [points]="dice3$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="4"
-    [points]="dice4$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="5"
-    [points]="dice5$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
+  <app-cube
+    [cubeNumber]="1"
+    [points]="cube1()"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="2"
+    [points]="cube2()"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="3"
+    [points]="cube3()"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="4"
+    [points]="cube4()"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="5"
+    [points]="cube5()"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
 </div>
 <div class="dice-container">
   <button (click)="onRandomize()">Randomize</button>
@@ -37,27 +37,27 @@
     </tr>
     <tr>
       <td>Ones</td>
-      <td>{{ ones$ | async }}</td>
+      <td>{{ ones() }}</td>
     </tr>
     <tr>
       <td>Twos</td>
-      <td>{{ twos$ | async }}</td>
+      <td>{{ twos() }}</td>
     </tr>
     <tr>
       <td>Threes</td>
-      <td>{{ threes$ | async }}</td>
+      <td>{{ threes() }}</td>
     </tr>
     <tr>
       <td>Fours</td>
-      <td>{{ fours$ | async }}</td>
+      <td>{{ fours() }}</td>
     </tr>
     <tr>
       <td>Fives</td>
-      <td>{{ fives$ | async }}</td>
+      <td>{{ fives() }}</td>
     </tr>
     <tr>
       <td>Sixes</td>
-      <td>{{ sixes$ | async }}</td>
+      <td>{{ sixes() }}</td>
     </tr>
   </table>
 
@@ -68,31 +68,31 @@
     </tr>
     <tr>
       <td>Three of a Kind</td>
-      <td>{{ threeOfAKind$ | async }}</td>
+      <td>{{ threeOfAKind() }}</td>
     </tr>
     <tr>
       <td>Four of a Kind</td>
-      <td>{{ fourOfAKind$ | async }}</td>
+      <td>{{ fourOfAKind() }}</td>
     </tr>
     <tr>
       <td>Full House</td>
-      <td>{{ fullHouse$ | async }}</td>
+      <td>{{ fullHouse() }}</td>
     </tr>
     <tr>
       <td>Small Straight</td>
-      <td>{{ smallStraight$ | async }}</td>
+      <td>{{ smallStraight() }}</td>
     </tr>
     <tr>
       <td>Large Straight</td>
-      <td>{{ largeStraight$ | async }}</td>
+      <td>{{ largeStraight() }}</td>
     </tr>
     <tr>
       <td>Jackpot</td>
-      <td>{{ jackpot$ | async }}</td>
+      <td>{{ jackpot() }}</td>
     </tr>
     <tr>
       <td>Chance</td>
-      <td>{{ chance$ | async }}</td>
+      <td>{{ chance() }}</td>
     </tr>
   </table>
 </div>
