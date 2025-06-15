@@ -1,5 +1,5 @@
 <div class="dice-box">
-  <div>Dice {{ diceNumber }}</div>
+  <div>Cube {{ cubeNumber }}</div>
   <select id="select" [formControl]="select" (change)="onSelectionChange()">
     @for (option of options; track option.points) {
       <option [value]="option.points">
@@ -7,5 +7,5 @@
       </option>
     }
   </select>
-  <img [src]="iconUrl" class="dice-icon" alt="Augenzahl" />
+  <img [src]="iconUrl" class="dice-icon" alt="Points" />
 </div>

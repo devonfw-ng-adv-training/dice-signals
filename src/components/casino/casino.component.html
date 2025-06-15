@@ -1,30 +1,30 @@
 <h1 class="tisch-title">Dice Signals</h1>
 <div class="dice-container">
-  <app-dice
-    [diceNumber]="1"
+  <app-cube
+    [cubeNumber]="1"
     [points]="dice1$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="2"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="2"
     [points]="dice2$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="3"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="3"
     [points]="dice3$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="4"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="4"
     [points]="dice4$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
-  <app-dice
-    [diceNumber]="5"
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
+  <app-cube
+    [cubeNumber]="5"
     [points]="dice5$ | async"
-    (diceChangeOutput)="onDiceChange($event)"
-  ></app-dice>
+    (cubeChangeOutput)="onDiceChange($event)"
+  ></app-cube>
 </div>
 <div class="dice-container">
   <button (click)="onRandomize()">Randomize</button>

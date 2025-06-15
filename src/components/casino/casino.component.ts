@@ -2,16 +2,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { DiceComponent } from '../dice/dice.component';
+import { CubeComponent } from '../cube/cube.component';
 
-export type DiceResult = {
-  diceNumber: number | undefined;
+export type CubeResult = {
+  cubeNumber: number | undefined;
   points: number | undefined | null;
 };
 
 @Component({
   selector: 'app-casino',
-  imports: [DiceComponent, AsyncPipe],
+  imports: [CubeComponent, AsyncPipe],
   templateUrl: './casino.component.html',
   styleUrl: './casino.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -166,9 +166,9 @@ export class CasinoComponent implements OnInit {
     );
   }
 
-  onDiceChange(result: DiceResult | null) {
+  onDiceChange(result: CubeResult | null) {
     if (result?.points) {
-      switch (result.diceNumber) {
+      switch (result.cubeNumber) {
         case 1:
           this.dice1$.next(result?.points);
           break;
