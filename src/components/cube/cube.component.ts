@@ -1,4 +1,11 @@
-import { Component, effect, input, OnInit, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DiceResult } from '../casino/casino.component';
 
@@ -7,6 +14,7 @@ import { DiceResult } from '../casino/casino.component';
   imports: [ReactiveFormsModule],
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CubeComponent implements OnInit {
   cubeNumber = input<number>();
