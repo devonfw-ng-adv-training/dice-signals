@@ -5,6 +5,16 @@ import {
   signal,
 } from '@angular/core';
 import { CubeComponent } from '../cube/cube.component';
+import {
+  computeChance,
+  computeFourOfAKind,
+  computeFullHouse,
+  computeJackpot,
+  computeLargeStraight,
+  computePointsOfOneKind,
+  computeSmallStraight,
+  computeThreeOfAKind,
+} from '../../utils/dice.util';
 
 export type DiceResult = {
   diceNumber: number | undefined;
@@ -19,6 +29,8 @@ export type DiceResult = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CasinoComponent {
+  throwNo = signal<number>(0);
+
   cube1 = signal<number>(6);
   cube2 = signal<number>(6);
   cube3 = signal<number>(6);
@@ -34,93 +46,20 @@ export class CasinoComponent {
     this.cube5(),
   ]);
 
-  ones = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 1 ? 1 : 0);
-    }, 0),
-  );
+  ones = computed(() => computePointsOfOneKind(this.allDice(), 1));
+  twos = computed(() => computePointsOfOneKind(this.allDice(), 2));
+  threes = computed(() => computePointsOfOneKind(this.allDice(), 3));
+  fours = computed(() => computePointsOfOneKind(this.allDice(), 4));
+  fives = computed(() => computePointsOfOneKind(this.allDice(), 5));
+  sixes = computed(() => computePointsOfOneKind(this.allDice(), 6));
 
-  twos = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 2 ? 2 : 0);
-    }, 0),
-  );
-
-  threes = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 3 ? 3 : 0);
-    }, 0),
-  );
-
-  fours = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 4 ? 4 : 0);
-    }, 0),
-  );
-
-  fives = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 5 ? 5 : 0);
-    }, 0),
-  );
-
-  sixes = computed(() =>
-    this.allDice().reduce((acc, curr) => {
-      return acc + (curr === 6 ? 6 : 0);
-    }, 0),
-  );
-
-  threeOfAKind = computed(() =>
-    getPointsCount(this.allDice()).findIndex((p) => p >= 3) === -1
-      ? 0
-      : this.allDice().reduce((acc, curr) => acc + curr),
-  );
-
-  fourOfAKind = computed(() =>
-    getPointsCount(this.allDice()).findIndex((p) => p >= 4) === -1
-      ? 0
-      : this.allDice().reduce((acc, curr) => acc + curr),
-  );
-
-  fullHouse = computed(() =>
-    getPointsCount(this.allDice()).some((p) => p === 3) &&
-    getPointsCount(this.allDice()).some((p) => p === 2)
-      ? 25
-      : 0,
-  );
-
-  smallStraight = computed(() => {
-    const count = getPointsCount(this.allDice());
-
-    return (count[1] >= 1 && count[2] >= 1 && count[3] >= 1 && count[4] >= 1) ||
-      (count[2] >= 1 && count[3] >= 1 && count[4] >= 1 && count[5] >= 1) ||
-      (count[3] >= 1 && count[4] >= 1 && count[5] >= 1 && count[6] >= 1)
-      ? 30
-      : 0;
-  });
-
-  largeStraight = computed(() => {
-    const count = getPointsCount(this.allDice());
-
-    return (count[1] >= 1 &&
-      count[2] >= 1 &&
-      count[3] >= 1 &&
-      count[4] >= 1 &&
-      count[5] >= 1) ||
-      (count[2] >= 1 &&
-        count[3] >= 1 &&
-        count[4] >= 1 &&
-        count[5] >= 1 &&
-        count[6] >= 1)
-      ? 40
-      : 0;
-  });
-
-  jackpot = computed(() =>
-    getPointsCount(this.allDice()).some((p) => p === 5) ? 50 : 0,
-  );
-
-  chance = computed(() => this.allDice().reduce((acc, curr) => acc + curr));
+  threeOfAKind = computed(() => computeThreeOfAKind(this.allDice()));
+  fourOfAKind = computed(() => computeFourOfAKind(this.allDice()));
+  fullHouse = computed(() => computeFullHouse(this.allDice()));
+  smallStraight = computed(() => computeSmallStraight(this.allDice()));
+  largeStraight = computed(() => computeLargeStraight(this.allDice()));
+  jackpot = computed(() => computeJackpot(this.allDice()));
+  chance = computed(() => computeChance(this.allDice()));
 
   onCubeChange(result: DiceResult | null) {
     if (result?.points) {
@@ -144,25 +83,7 @@ export class CasinoComponent {
     }
   }
 
-  onRandomize() {
-    this.cube1.set(getRandomAugen());
-    this.cube2.set(getRandomAugen());
-    this.cube3.set(getRandomAugen());
-    this.cube4.set(getRandomAugen());
-    this.cube5.set(getRandomAugen());
+  onRollTheDice() {
+    this.throwNo.update((no) => no + 1);
   }
-}
-
-function getRandomAugen() {
-  return Math.floor(Math.random() * 6) + 1;
-}
-
-function getPointsCount(points: number[]) {
-  return points.reduce(
-    (acc, currentValue) => {
-      acc[currentValue] = acc[currentValue] + 1;
-      return acc;
-    },
-    [0, 0, 0, 0, 0, 0, 0],
-  );
 }

@@ -1,33 +1,34 @@
 <h1 class="tisch-title">Dice Signals</h1>
 <div class="dice-container">
+  <button (click)="onRollTheDice()">Roll the Dice!</button>
+  <span>Throw #: {{ throwNo() }}</span>
+</div>
+<div class="dice-container">
   <app-cube
     [cubeNumber]="1"
-    [points]="cube1()"
+    [throwNo]="throwNo()"
     (cubeChangeOutput)="onCubeChange($event)"
   ></app-cube>
   <app-cube
     [cubeNumber]="2"
-    [points]="cube2()"
+    [throwNo]="throwNo()"
     (cubeChangeOutput)="onCubeChange($event)"
   ></app-cube>
   <app-cube
     [cubeNumber]="3"
-    [points]="cube3()"
+    [throwNo]="throwNo()"
     (cubeChangeOutput)="onCubeChange($event)"
   ></app-cube>
   <app-cube
     [cubeNumber]="4"
-    [points]="cube4()"
+    [throwNo]="throwNo()"
     (cubeChangeOutput)="onCubeChange($event)"
   ></app-cube>
   <app-cube
     [cubeNumber]="5"
-    [points]="cube5()"
+    [throwNo]="throwNo()"
     (cubeChangeOutput)="onCubeChange($event)"
   ></app-cube>
-</div>
-<div class="dice-container">
-  <button (click)="onRandomize()">Randomize</button>
 </div>
 <div class="result-container">
   <table>

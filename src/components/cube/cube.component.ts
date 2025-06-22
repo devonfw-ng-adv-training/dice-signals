@@ -3,30 +3,29 @@ import {
   Component,
   effect,
   input,
-  OnInit,
   output,
+  signal,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { DiceResult } from '../casino/casino.component';
+import { getRandomPoints } from '../../utils/dice.util';
 
 @Component({
   selector: 'app-cube',
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CubeComponent implements OnInit {
+export class CubeComponent {
   cubeNumber = input<number>();
-  points = input<number | null>(null);
+  throwNo = input<number>();
 
-  currentPoints: number | null = 0;
+  currentPoints = signal(6);
   iconUrl: string = 'assets/icons/6.svg';
 
   cubeChangeOutput = output<DiceResult | null>();
 
-  // Form with select-box
-  select = new FormControl<number>(6, Validators.required);
   options = [
     { points: 1, label: 'One' },
     { points: 2, label: 'Two' },
@@ -38,23 +37,23 @@ export class CubeComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      const points = this.points();
-      this.select.setValue(points);
+      const throwNo = this.throwNo();
 
-      this.iconUrl = `assets/icons/${points}.svg`;
+      if (throwNo) {
+        const points = getRandomPoints();
+
+        this.currentPoints.set(points);
+      }
     });
-  }
 
-  ngOnInit() {
-    this.currentPoints = this.points();
-  }
+    effect(() => {
+      const currentPoints = this.currentPoints();
+      this.iconUrl = `assets/icons/${currentPoints}.svg`;
 
-  onSelectionChange() {
-    this.currentPoints = this.select.value;
-
-    this.cubeChangeOutput.emit({
-      diceNumber: this.cubeNumber(),
-      points: Number(this.currentPoints),
+      this.cubeChangeOutput.emit({
+        diceNumber: this.cubeNumber(),
+        points: Number(currentPoints),
+      });
     });
   }
 }
