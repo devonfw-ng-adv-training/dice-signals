@@ -1,5 +1,5 @@
 <div class="dice-box">
-  <div>Dice {{ cubeNumber() }}</div>
+  <div>Cube {{ cubeNumber() }}</div>
   <select id="select" [(ngModel)]="currentPoints">
     @for (option of options; track option.points) {
       <option [value]="option.points">
