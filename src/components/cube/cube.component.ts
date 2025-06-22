@@ -5,32 +5,34 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CubeResult } from '../casino/casino.component';
+import { BehaviorSubject } from 'rxjs';
+import { getRandomPoints } from '../../utils/dice.util';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cube',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule, AsyncPipe],
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CubeComponent {
   @Input() cubeNumber: number | undefined;
-  @Input() set points(n: number | undefined | null) {
-    this.currentPoints = n ? n : undefined;
+  @Input() set throwNo(n: number | undefined) {
+    if (n) {
+      const points = getRandomPoints();
 
-    this.select.setValue(this.currentPoints ? this.currentPoints : null);
-    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
+      this.onSelectionChange(points);
+    }
   }
 
   @Output() cubeChangeOutput = new EventEmitter<CubeResult | null>();
 
-  currentPoints: number | undefined = 6;
+  currentPoints$ = new BehaviorSubject<number>(6);
   iconUrl: string = 'assets/icons/6.svg';
 
-  // Form with select-box
-  select = new FormControl<number>(6, Validators.required);
   options = [
     { points: 1, label: 'One' },
     { points: 2, label: 'Two' },
@@ -40,13 +42,13 @@ export class CubeComponent {
     { points: 6, label: 'Six' },
   ];
 
-  onSelectionChange() {
-    this.currentPoints = this.select.value ? this.select.value : undefined;
-    this.iconUrl = `assets/icons/${this.currentPoints}.svg`;
+  onSelectionChange(points: number) {
+    this.currentPoints$.next(points);
+    this.iconUrl = `assets/icons/${points}.svg`;
 
     this.cubeChangeOutput.emit({
       cubeNumber: this.cubeNumber,
-      points: Number(this.currentPoints),
+      points: Number(points),
     });
   }
 }

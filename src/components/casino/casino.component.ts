@@ -1,8 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { CubeComponent } from '../cube/cube.component';
+import {
+  computeChance,
+  computeFourOfAKind,
+  computeFullHouse,
+  computeJackpot,
+  computeLargeStraight,
+  computePointsOfOneKind,
+  computeSmallStraight,
+  computeThreeOfAKind,
+} from '../../utils/dice.util';
 
 export type CubeResult = {
   cubeNumber: number | undefined;
@@ -17,6 +27,8 @@ export type CubeResult = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CasinoComponent implements OnInit {
+  throwNo$ = new BehaviorSubject<number>(0);
+
   dice1$ = new BehaviorSubject<number>(6);
   dice2$ = new BehaviorSubject<number>(6);
   dice3$ = new BehaviorSubject<number>(6);
@@ -39,6 +51,7 @@ export class CasinoComponent implements OnInit {
 
   ngOnInit() {
     const alldDice$ = combineLatest([
+      of(0),
       this.dice1$,
       this.dice2$,
       this.dice3$,
@@ -47,123 +60,39 @@ export class CasinoComponent implements OnInit {
     ]);
 
     this.ones$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 1 ? 1 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 1)),
     );
-
     this.twos$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 2 ? 2 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 2)),
     );
-
     this.threes$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 3 ? 3 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 3)),
     );
-
     this.fours$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 4 ? 4 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 4)),
     );
-
     this.fives$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 5 ? 5 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 5)),
     );
-
     this.sixes$ = alldDice$.pipe(
-      map((points) =>
-        points.reduce((acc, curr) => {
-          return acc + (curr === 6 ? 6 : 0);
-        }, 0),
-      ),
+      map((points) => computePointsOfOneKind(points, 6)),
     );
 
     this.threeOfAKind$ = alldDice$.pipe(
-      map((points) => {
-        return getPointsCount(points).findIndex((p) => p >= 3) === -1
-          ? 0
-          : points.reduce((acc, curr) => acc + curr);
-      }),
+      map((points) => computeThreeOfAKind(points)),
     );
-
     this.fourOfAKind$ = alldDice$.pipe(
-      map((points) => {
-        return getPointsCount(points).findIndex((p) => p >= 4) === -1
-          ? 0
-          : points.reduce((acc, curr) => acc + curr);
-      }),
+      map((points) => computeFourOfAKind(points)),
     );
-
-    this.fullHouse$ = alldDice$.pipe(
-      map((points) => {
-        return getPointsCount(points).some((p) => p === 3) &&
-          getPointsCount(points).some((p) => p === 2)
-          ? 25
-          : 0;
-      }),
-    );
-
+    this.fullHouse$ = alldDice$.pipe(map((points) => computeFullHouse(points)));
     this.smallStraight$ = alldDice$.pipe(
-      map((points) => {
-        const count = getPointsCount(points);
-
-        return (count[1] >= 1 &&
-          count[2] >= 1 &&
-          count[3] >= 1 &&
-          count[4] >= 1) ||
-          (count[2] >= 1 && count[3] >= 1 && count[4] >= 1 && count[5] >= 1) ||
-          (count[3] >= 1 && count[4] >= 1 && count[5] >= 1 && count[6] >= 1)
-          ? 30
-          : 0;
-      }),
+      map((points) => computeSmallStraight(points)),
     );
-
     this.largeStraight$ = alldDice$.pipe(
-      map((points) => {
-        const count = getPointsCount(points);
-
-        return (count[1] >= 1 &&
-          count[2] >= 1 &&
-          count[3] >= 1 &&
-          count[4] >= 1 &&
-          count[5] >= 1) ||
-          (count[2] >= 1 &&
-            count[3] >= 1 &&
-            count[4] >= 1 &&
-            count[5] >= 1 &&
-            count[6] >= 1)
-          ? 40
-          : 0;
-      }),
+      map((points) => computeLargeStraight(points)),
     );
-
-    this.jackpot$ = alldDice$.pipe(
-      map((points) => {
-        return getPointsCount(points).some((p) => p === 5) ? 50 : 0;
-      }),
-    );
-
-    this.chance$ = alldDice$.pipe(
-      map((points) => {
-        return points.reduce((acc, curr) => acc + curr);
-      }),
-    );
+    this.jackpot$ = alldDice$.pipe(map((points) => computeJackpot(points)));
+    this.chance$ = alldDice$.pipe(map((points) => computeChance(points)));
   }
 
   onCubeChange(result: CubeResult | null) {
@@ -188,25 +117,7 @@ export class CasinoComponent implements OnInit {
     }
   }
 
-  onRandomize() {
-    this.dice1$.next(getRandomPoints());
-    this.dice2$.next(getRandomPoints());
-    this.dice3$.next(getRandomPoints());
-    this.dice4$.next(getRandomPoints());
-    this.dice5$.next(getRandomPoints());
+  onRollTheDice() {
+    this.throwNo$.next(this.throwNo$.value + 1);
   }
-}
-
-function getRandomPoints() {
-  return Math.floor(Math.random() * 6) + 1;
-}
-
-function getPointsCount(points: number[]) {
-  return points.reduce(
-    (acc, currentValue) => {
-      acc[currentValue] = acc[currentValue] + 1;
-      return acc;
-    },
-    [0, 0, 0, 0, 0, 0, 0],
-  );
 }
