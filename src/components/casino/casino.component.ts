@@ -46,7 +46,7 @@ export class CasinoComponent {
   // You can use the dice.util.ts utility to calculate the actual results for the categories (Ones, Twos, Full House, etc..)
   // or try to write yout own computation.
 
-  // Add the coputed values to the table that is prepared in the template.
+  // Display the computed values in the table that is prepared in the template.
 
   onCubeChange(result: DiceResult | null) {
     if (result?.points) {
