@@ -37,29 +37,16 @@ export class CasinoComponent {
   cube4 = signal<number>(6);
   cube5 = signal<number>(6);
 
-  allDice = computed(() => [
-    0,
-    this.cube1(),
-    this.cube2(),
-    this.cube3(),
-    this.cube4(),
-    this.cube5(),
-  ]);
+  // Todo Use signals to compute the result table here using the values of the cube signals above.
 
-  ones = computed(() => computePointsOfOneKind(this.allDice(), 1));
-  twos = computed(() => computePointsOfOneKind(this.allDice(), 2));
-  threes = computed(() => computePointsOfOneKind(this.allDice(), 3));
-  fours = computed(() => computePointsOfOneKind(this.allDice(), 4));
-  fives = computed(() => computePointsOfOneKind(this.allDice(), 5));
-  sixes = computed(() => computePointsOfOneKind(this.allDice(), 6));
+  /* ones = 
+     twos = 
+  */
 
-  threeOfAKind = computed(() => computeThreeOfAKind(this.allDice()));
-  fourOfAKind = computed(() => computeFourOfAKind(this.allDice()));
-  fullHouse = computed(() => computeFullHouse(this.allDice()));
-  smallStraight = computed(() => computeSmallStraight(this.allDice()));
-  largeStraight = computed(() => computeLargeStraight(this.allDice()));
-  jackpot = computed(() => computeJackpot(this.allDice()));
-  chance = computed(() => computeChance(this.allDice()));
+  // You can use the dice.util.ts utility to calculate the actual results for the categories (Ones, Twos, Full House, etc..)
+  // or try to write yout own computation.
+
+  // Add the coputed values to the table that is prepared in the template.
 
   onCubeChange(result: DiceResult | null) {
     if (result?.points) {
