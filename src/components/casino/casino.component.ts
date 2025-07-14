@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -16,7 +16,7 @@ export type CubeResult = {
   styleUrl: './casino.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CasinoComponent implements OnInit {
+export class CasinoComponent {
   throwNo$ = new BehaviorSubject<number>(0);
 
   dice1$ = new BehaviorSubject<number>(6);
@@ -24,14 +24,6 @@ export class CasinoComponent implements OnInit {
   dice3$ = new BehaviorSubject<number>(6);
   dice4$ = new BehaviorSubject<number>(6);
   dice5$ = new BehaviorSubject<number>(6);
-
-  // Todo Define observables here to handle categories "ones", "twos",...
-
-  ngOnInit() {
-    // Todo Set the calculations for the above defined observables here
-    // You can use the dice.util.ts utility to calculate the actual results for the categories
-    // or try to write your own computation.
-  }
 
   onCubeChange(result: CubeResult | null) {
     if (result?.points) {

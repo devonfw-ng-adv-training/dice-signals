@@ -1,36 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CubeResult } from '../casino/casino.component';
-import { BehaviorSubject } from 'rxjs';
-import { getRandomPoints } from '../../utils/dice.util';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cube',
-  imports: [ReactiveFormsModule, FormsModule, AsyncPipe],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CubeComponent {
-  @Input() cubeNumber: number | undefined;
-  @Input() set throwNo(n: number | undefined) {
-    if (n) {
-      const points = getRandomPoints();
+  // Todo Create an input (@Input()) for cubeNumber here
 
-      this.onSelectionChange(points);
-    }
-  }
+  // Todo Create an input (@Input()) for throwNo here with setter: on new value generate new points using getRandomPoints() and call onSelectionChange()
 
-  @Output() cubeChangeOutput = new EventEmitter<CubeResult | null>();
+  // Todo Crate a new output (OutputEmitter with @Output()) here that will send an event to the parent when the cube points change
 
-  currentPoints$ = new BehaviorSubject<number>(6);
+  // Todo create a BehaviorSubject here to handle the current points
+
   iconUrl: string = 'assets/icons/6.svg';
 
   options = [
@@ -43,12 +29,8 @@ export class CubeComponent {
   ];
 
   onSelectionChange(points: number) {
-    this.currentPoints$.next(points);
-    this.iconUrl = `assets/icons/${points}.svg`;
-
-    this.cubeChangeOutput.emit({
-      cubeNumber: this.cubeNumber,
-      points: Number(points),
-    });
+    // Todo Set subject holding current points to new value here
+    // Todo Update the iconurl here
+    // Todo Emit the new value with the output emitter defined above
   }
 }
