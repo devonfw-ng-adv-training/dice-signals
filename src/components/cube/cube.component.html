@@ -1,6 +1,7 @@
 <div class="dice-box">
-  <div>Cube {{ cubeNumber() }}</div>
-  <select id="select" [(ngModel)]="currentPoints">
+  <div>Cube {{ "Todo display Cube No. here" }}</div>
+  <!-- Hint: use ngModel in the next line like this: select id="select" [(ngModel)]="currentPoints"-->
+  <select id="select">
     @for (option of options; track option.points) {
       <option [value]="option.points">
         {{ option.label }}

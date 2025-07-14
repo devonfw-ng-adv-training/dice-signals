@@ -1,20 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CubeComponent } from '../cube/cube.component';
-import {
-  computeChance,
-  computeFourOfAKind,
-  computeFullHouse,
-  computeJackpot,
-  computeLargeStraight,
-  computePointsOfOneKind,
-  computeSmallStraight,
-  computeThreeOfAKind,
-} from '../../utils/dice.util';
 
 export type DiceResult = {
   diceNumber: number | undefined;
@@ -36,17 +21,6 @@ export class CasinoComponent {
   cube3 = signal<number>(6);
   cube4 = signal<number>(6);
   cube5 = signal<number>(6);
-
-  // Todo Use signals to compute the result table here using the values of the cube signals above.
-
-  /* ones = 
-     twos = 
-  */
-
-  // You can use the dice.util.ts utility to calculate the actual results for the categories (Ones, Twos, Full House, etc..)
-  // or try to write yout own computation.
-
-  // Display the computed values in the table that is prepared in the template.
 
   onCubeChange(result: DiceResult | null) {
     if (result?.points) {

@@ -1,14 +1,7 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  input,
-  output,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DiceResult } from '../casino/casino.component';
-import { getRandomPoints } from '../../utils/dice.util';
+//import { DiceResult } from '../casino/casino.component';
+//import { getRandomPoints } from '../../utils/dice.util';
 
 @Component({
   selector: 'app-cube',
@@ -18,13 +11,13 @@ import { getRandomPoints } from '../../utils/dice.util';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CubeComponent {
-  cubeNumber = input<number>();
-  throwNo = input<number>();
+  // Todo Create two input signals here to get values "cubeNumber" and "throwNo"
 
-  currentPoints = signal(6);
   iconUrl: string = 'assets/icons/6.svg';
 
-  cubeChangeOutput = output<DiceResult | null>();
+  // Todo Create a signal here to store "currentPoints"
+
+  // Todo Create an output here that will send an event to the parent when the cube points change
 
   options = [
     { points: 1, label: 'One' },
@@ -37,23 +30,11 @@ export class CubeComponent {
 
   constructor() {
     effect(() => {
-      const throwNo = this.throwNo();
-
-      if (throwNo) {
-        const points = getRandomPoints();
-
-        this.currentPoints.set(points);
-      }
+      // Todo Create an effect here that acts on change of throw no. It should set the cube to new random points.
     });
 
     effect(() => {
-      const currentPoints = this.currentPoints();
-      this.iconUrl = `assets/icons/${currentPoints}.svg`;
-
-      this.cubeChangeOutput.emit({
-        diceNumber: this.cubeNumber(),
-        points: Number(currentPoints),
-      });
+      // Todo Create an effect here that acts on change of current points. It should change the icon respectively and emit an output.
     });
   }
 }

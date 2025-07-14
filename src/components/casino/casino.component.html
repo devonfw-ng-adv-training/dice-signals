@@ -4,96 +4,13 @@
   <span>Throw #: {{ throwNo() }}</span>
 </div>
 <div class="dice-container">
-  <app-cube
-    [cubeNumber]="1"
-    [throwNo]="throwNo()"
-    (cubeChangeOutput)="onCubeChange($event)"
-  ></app-cube>
-  <app-cube
-    [cubeNumber]="2"
-    [throwNo]="throwNo()"
-    (cubeChangeOutput)="onCubeChange($event)"
-  ></app-cube>
-  <app-cube
-    [cubeNumber]="3"
-    [throwNo]="throwNo()"
-    (cubeChangeOutput)="onCubeChange($event)"
-  ></app-cube>
-  <app-cube
-    [cubeNumber]="4"
-    [throwNo]="throwNo()"
-    (cubeChangeOutput)="onCubeChange($event)"
-  ></app-cube>
-  <app-cube
-    [cubeNumber]="5"
-    [throwNo]="throwNo()"
-    (cubeChangeOutput)="onCubeChange($event)"
-  ></app-cube>
-</div>
-<div class="result-container">
-  <table>
-    <tr>
-      <th>Category</th>
-      <th>Points</th>
-    </tr>
-    <tr>
-      <td>Ones</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Twos</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Threes</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Fours</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Fives</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Sixes</td>
-      <td></td>
-    </tr>
-  </table>
-
-  <table>
-    <tr>
-      <th>Category</th>
-      <th>Points</th>
-    </tr>
-    <tr>
-      <td>Three of a Kind</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Four of a Kind</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Full House</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Small Straight</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Large Straight</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Jackpot</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Chance</td>
-      <td></td>
-    </tr>
-  </table>
+  <!-- Todo Add the input and output properties to the cube components -->
+  <!-- Input: cubeNumber -->
+  <!-- Input: throwNo -->
+  <!-- Output: should call onCubeChange() -->
+  <app-cube></app-cube>
+  <app-cube></app-cube>
+  <app-cube></app-cube>
+  <app-cube></app-cube>
+  <app-cube></app-cube>
 </div>
