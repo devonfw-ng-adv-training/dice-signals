@@ -12,11 +12,13 @@ The casino component contains five cube components and a "Roll" button that make
 Steps:
 
 #### CubeComponent (cube.component.ts, see Todo lines):
-- Implement input signals, a signal for current points and an output that is triggered on change of current points
+- Implement input signals
+- Implement a signal for current points 
+- Implement output that is triggered on change of current points
 - Implement effects 
 
 #### CubeComponent Template (cube.component.html, see given hint):
-- Connect currentPoints signal to select drop-down
+- Connect currentPoints signal to select input element
 
 #### CasinoComponent Template (casino.component.html):
 - Add the input and output parameters to the cube components in the template in oder to pass values to the input signals
