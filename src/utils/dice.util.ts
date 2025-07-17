@@ -3,35 +3,35 @@ export function getRandomPoints() {
 }
 
 export function computePointsOfOneKind(
-  pointsOfDices: number[],
+  pointsOfDice: number[],
   kind: number,
 ): number {
-  return pointsOfDices.reduce((acc, curr) => {
+  return pointsOfDice.reduce((acc, curr) => {
     return acc + (curr === kind ? kind : 0);
   });
 }
 
-export function computeThreeOfAKind(pointsOfDices: number[]): number {
-  return getPointsCount(pointsOfDices).findIndex((p) => p >= 3) === -1
+export function computeThreeOfAKind(pointsOfDice: number[]): number {
+  return getPointsCount(pointsOfDice).findIndex((p) => p >= 3) === -1
     ? 0
-    : pointsOfDices.reduce((acc, curr) => acc + curr);
+    : pointsOfDice.reduce((acc, curr) => acc + curr);
 }
 
-export function computeFourOfAKind(pointsOfDices: number[]): number {
-  return getPointsCount(pointsOfDices).findIndex((p) => p >= 4) === -1
+export function computeFourOfAKind(pointsOfDice: number[]): number {
+  return getPointsCount(pointsOfDice).findIndex((p) => p >= 4) === -1
     ? 0
-    : pointsOfDices.reduce((acc, curr) => acc + curr);
+    : pointsOfDice.reduce((acc, curr) => acc + curr);
 }
 
-export function computeFullHouse(pointsOfDices: number[]): number {
-  return getPointsCount(pointsOfDices).some((p) => p === 3) &&
-    getPointsCount(pointsOfDices).some((p) => p === 2)
+export function computeFullHouse(pointsOfDice: number[]): number {
+  return getPointsCount(pointsOfDice).some((p) => p === 3) &&
+    getPointsCount(pointsOfDice).some((p) => p === 2)
     ? 25
     : 0;
 }
 
-export function computeSmallStraight(pointsOfDices: number[]): number {
-  const count = getPointsCount(pointsOfDices);
+export function computeSmallStraight(pointsOfDice: number[]): number {
+  const count = getPointsCount(pointsOfDice);
 
   return (count[1] >= 1 && count[2] >= 1 && count[3] >= 1 && count[4] >= 1) ||
     (count[2] >= 1 && count[3] >= 1 && count[4] >= 1 && count[5] >= 1) ||
@@ -40,8 +40,8 @@ export function computeSmallStraight(pointsOfDices: number[]): number {
     : 0;
 }
 
-export function computeLargeStraight(pointsOfDices: number[]): number {
-  const count = getPointsCount(pointsOfDices);
+export function computeLargeStraight(pointsOfDice: number[]): number {
+  const count = getPointsCount(pointsOfDice);
 
   return (count[1] >= 1 &&
     count[2] >= 1 &&
@@ -57,12 +57,12 @@ export function computeLargeStraight(pointsOfDices: number[]): number {
     : 0;
 }
 
-export function computeJackpot(pointsOfDices: number[]): number {
-  return getPointsCount(pointsOfDices).some((p) => p === 5) ? 50 : 0;
+export function computeJackpot(pointsOfDice: number[]): number {
+  return getPointsCount(pointsOfDice).some((p) => p === 5) ? 50 : 0;
 }
 
-export function computeChance(pointsOfDices: number[]): number {
-  return pointsOfDices.reduce((acc, curr) => acc + curr);
+export function computeChance(pointsOfDice: number[]): number {
+  return pointsOfDice.reduce((acc, curr) => acc + curr);
 }
 
 export function getPointsCount(points: number[]) {
