@@ -1,6 +1,21 @@
-# Dices
+# Dice
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+## Execise 02 Signals
+
+### Goal: Setup table with categories below dice
+ 
+As the dice pass values of their current points to the parent component we can use them to calculate the values of the categories.
+
+Steps:
+
+#### CasinoComponent (casino.component.ts)
+- Create signals to compute the values for the categories. You can use the dice.util.ts utility functions in order to map from the
+cube points to the values of the categories.
+- Bonus: do not use the util but write own functions to calculate the categories
+
+#### CasinoComponent Template (casino.component.html):
+- Add the signals holding the values of the categories to the corresponding places in the template to display them in the prepared table.
+
 
 ## Development server
 
@@ -9,51 +24,3 @@ To start a local development server, run:
 ```bash
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
