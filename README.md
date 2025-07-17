@@ -1,6 +1,27 @@
-# Dices
+# Dice
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+## Execise 01 Signals
+
+### Goal: Setup Casino and Cube components with signals
+
+In the app we have two component types: a casino component, that holds the application state 
+and a cube component that represents a single cube that can generate and display a random number.
+
+The casino component contains five cube components and a "Roll" button that makes all cube components generate their next number.
+
+Steps:
+
+#### CubeComponent (cube.component.ts, see Todo lines):
+- Implement input signals, a signal for current points and an output that is triggered on change of current points
+- Implement effects 
+
+#### CubeComponent Template (cube.component.html, see given hint):
+- Connect currentPoints signal to select drop-down
+
+#### CasinoComponent Template (casino.component.html):
+- Add the input and output parameters to the cube components in the template in oder to pass values to the input signals
+defined above and to call the correspondent handler function for the output.
+
 
 ## Development server
 
@@ -10,50 +31,4 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
