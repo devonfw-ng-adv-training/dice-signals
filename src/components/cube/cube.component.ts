@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   input,
   output,
@@ -22,7 +23,7 @@ export class CubeComponent {
   throwNo = input<number>();
 
   currentPoints = signal(6);
-  iconUrl: string = 'assets/icons/6.svg';
+  iconUrl = computed(() => `assets/icons/${this.currentPoints()}.svg`);
 
   cubeChangeOutput = output<DiceResult | null>();
 
@@ -48,7 +49,6 @@ export class CubeComponent {
 
     effect(() => {
       const currentPoints = this.currentPoints();
-      this.iconUrl = `assets/icons/${currentPoints}.svg`;
 
       this.cubeChangeOutput.emit({
         diceNumber: this.cubeNumber(),
