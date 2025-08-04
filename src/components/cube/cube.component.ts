@@ -49,7 +49,6 @@ export class CubeComponent {
 
     effect(() => {
       const currentPoints = this.currentPoints();
-      //      this.iconUrl.set(`assets/icons/${currentPoints}.svg`);
 
       this.cubeChangeOutput.emit({
         diceNumber: this.cubeNumber(),
