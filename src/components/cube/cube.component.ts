@@ -48,11 +48,9 @@ export class CubeComponent {
     });
 
     effect(() => {
-      const currentPoints = this.currentPoints();
-
       this.cubeChangeOutput.emit({
         diceNumber: this.cubeNumber(),
-        points: Number(currentPoints),
+        points: Number(this.currentPoints()),
       });
     });
   }
