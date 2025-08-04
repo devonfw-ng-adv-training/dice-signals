@@ -13,7 +13,8 @@ import { FormsModule } from '@angular/forms';
 export class CubeComponent {
   // Todo Create two input signals here to get values "cubeNumber" and "throwNo"
 
-  iconUrl: string = 'assets/icons/6.svg';
+  // Todo Create a computed signal here ttaht sets the icon url to the current value, e.g. assets/icons/6.svg for a six on the cube.
+  // iconUrl = computed(...
 
   // Todo Create a signal here to store "currentPoints"
 
