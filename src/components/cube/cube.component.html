@@ -2,10 +2,10 @@
   <div>Cube {{ cubeNumber() }}</div>
   <select id="select" [(ngModel)]="currentPoints">
     @for (option of options; track option.points) {
-      <option [value]="option.points">
-        {{ option.label }}
-      </option>
+    <option [value]="option.points">
+      {{ option.label }}
+    </option>
     }
   </select>
-  <img [src]="iconUrl" class="dice-icon" alt="Points" />
+  <img [src]="iconUrl()" class="dice-icon" alt="Points" />
 </div>
