@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CubeResult } from '../casino/casino.component';
 import { BehaviorSubject } from 'rxjs';
 import { getRandomPoints } from '../../utils/dice.util';
@@ -13,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cube',
-  imports: [ReactiveFormsModule, FormsModule, AsyncPipe],
+  imports: [FormsModule, AsyncPipe],
   templateUrl: './cube.component.html',
   styleUrl: './cube.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
