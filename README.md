@@ -28,6 +28,26 @@ Steps:
 - Add the input and output parameters to the cube components in the template in oder to pass values to the input signals
   defined above and to call the correspondent handler function for the output.
 
+## Execise 02 Signals
+
+Please note: you can either continue with exercise 02 here on your results of exercise 01, or you check out the prepared branch "exercise-02-signals"
+
+### Goal: Setup table with categories below dice
+
+As the dice pass values of their current points to the parent component we can use them to calculate the values of the categories.
+
+Steps:
+
+#### CasinoComponent (casino.component.ts)
+
+- Create signals to compute the values for the categories. You can use the dice.util.ts utility functions in order to map from the
+  cube points to the values of the categories.
+- Bonus: do not use the util but write own functions to calculate the categories
+
+#### CasinoComponent Template (casino.component.html):
+
+- Add the signals holding the values of the categories to the corresponding places in the template to display them in the prepared table.
+
 ## Development server
 
 To start a local development server, run:
